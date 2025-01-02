@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EJXP Live Stream</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #1e1b2f;
+      color: white;
+      overflow-x: hidden;
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    .navbar .logo {
+      margin: auto;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #e0b3ff;
+      text-decoration: none;
+    }
+    .navbar a {
+      text-decoration: none;
+      color: #e0b3ff;
+    }
+    .navbar a:hover {
+      color: #b68fcf;
+    }
+    .stream-section {
+      padding-top: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .stream-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .iframe-container {
+      flex: 2;
+      max-width: 800px;
+      height: 500px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 12px;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+    }
+    .iframe-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px;
+    }
+    .stream-chat {
+      flex: 1;
+      max-width: 400px;
+      height: 500px;
+      background: #272347;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .stream-chat iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .stream-chat-toggle {
+      display: none;
+      margin: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #e0b3ff;
+      color: #1e1b2f;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .stream-chat-toggle:hover {
+      background: #9670b6;
+      color: white;
+    }
+    .stream-actions {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .stream-actions a {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      border: none;
+      background: #e0b3ff;
+      color: #1e1b2f;
+      font-weight: 600;
+      border-radius: 25px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .stream-actions a:hover {
+      background: #9670b6;
+      color: white;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.9);
+      color: #999;
+      margin-top: 2rem;
+    }
+    footer .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    footer .social-icons a {
+      color: #999;
+      font-size: 1.5rem;
+      transition: 0.3s;
+    }
+    footer .social-icons a:hover {
+      color: #e0b3ff;
+    }
+    @media (max-width: 1024px) {
+      .iframe-container {
+        flex: 1;
+        height: 400px;
+      }
+      .stream-chat {
+        flex: 1;
+        max-width: 350px;
+        height: 400px;
+      }
+    }
+    @media (max-width: 768px) {
+      .stream-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .stream-chat {
+        display: none;
+      }
+      .stream-chat-toggle {
+        display: block;
+      }
+      .iframe-container {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo"><a href="https://ejxp.org">EJXP</a></div>
+  </div>
+
+  <section class="stream-section" id="stream">
+    <h1>Welcome to EJXP's Live Stream</h1>
+    <p>Enjoy the show and interact in real-time!</p>
+    <h5>If screen is black, I'm probably not streaming.</h5>
+    <div class="stream-container">
+      <div class="iframe-container">
+        <iframe src="https://player.twitch.tv/?channel=ejxp123&parent=ejxp.org" frameborder="0" allowfullscreen scrolling="no"></iframe>
+      </div>
+      <div class="stream-chat" id="chatBox">
+        <iframe src="https://www.twitch.tv/embed/ejxp123/chat?parent=ejxp.org"></iframe>
+      </div>
+    </div>
+    <button class="stream-chat-toggle" id="toggleChat">Toggle Chat</button>
+    <div class="stream-actions">
+      <a href="https://www.twitch.tv/ejxp123" target="_blank">Follow on Twitch</a>
+      <a href="https://twitter.com/intent/tweet?text=Check+out+EJXP%27s+live+stream!+https://ejxp.org" target="_blank">Share Stream</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="social-icons">
+      <a href="https://discord.gg/cKUneG89Aj" target="_blank"><i class="fab fa-discord"></i></a>
+      <a href="https://github.com/ejxp" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://youtube.com/@EJXP123" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://tiktok.com/@ejxpcorp" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+    <p>&copy; 2025 EJXP. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    const toggleChat = document.getElementById('toggleChat');
+    const chatBox = document.getElementById('chatBox');
+    toggleChat.addEventListener('click', () => {
+      chatBox.style.display = chatBox.style.display === 'none' ? 'flex' : 'none';
+    });
+  </script>
+</body>
+</html>
